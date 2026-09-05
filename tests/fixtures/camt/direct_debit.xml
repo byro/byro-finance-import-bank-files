@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.08" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BkToCstmrStmt>
+    <GrpHdr>
+      <MsgId>MSG-2026-01-16-0001</MsgId>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+    </GrpHdr>
+    <Stmt>
+      <Id>2026-01-15-001</Id>
+      <ElctrncSeqNb>12</ElctrncSeqNb>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+      <FrToDt>
+        <FrDtTm>2026-01-15T00:00:00+01:00</FrDtTm>
+        <ToDtTm>2026-01-15T23:59:59+01:00</ToDtTm>
+      </FrToDt>
+      <Acct>
+        <Id><IBAN>DE02120300000000202051</IBAN></Id>
+        <Ccy>EUR</Ccy>
+        <Ownr><Nm>Musterverein e.V.</Nm></Ownr>
+        <Svcr><FinInstnId><BICFI>BYLADEM1001</BICFI></FinInstnId></Svcr>
+      </Acct>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>OPBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">1000.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-14</Dt></Dt>
+      </Bal>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>CLBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">987.01</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-15</Dt></Dt>
+      </Bal>
+      <Ntry>
+        <NtryRef>1</NtryRef>
+        <Amt Ccy="EUR">12.99</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts><Cd>BOOK</Cd></Sts>
+        <BookgDt><Dt>2026-01-15</Dt></BookgDt>
+        <ValDt><Dt>2026-01-15</Dt></ValDt>
+        <AcctSvcrRef>2026011500005-001</AcctSvcrRef>
+        <BkTxCd><Domn><Cd>PMNT</Cd><Fmly><Cd>IDDT</Cd><SubFmlyCd>ESDD</SubFmlyCd></Fmly></Domn></BkTxCd>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-ABO-2026-01</EndToEndId><MndtId>MANDAT-987654</MndtId></Refs>
+            <Amt Ccy="EUR">12.99</Amt><CdtDbtInd>DBIT</CdtDbtInd>
+            <RltdPties><Dbtr><Pty><Nm>Musterverein e.V.</Nm></Pty></Dbtr><DbtrAcct><Id><IBAN>DE02120300000000202051</IBAN></Id></DbtrAcct><Cdtr><Pty><Nm>Streaming Dienst AG</Nm><Id><PrvtId><Othr><Id>CUSTOMER-42</Id><SchmeNm><Cd>CUST</Cd></SchmeNm></Othr><Othr><Id>DE98ZZZ09999999999</Id></Othr></PrvtId></Id></Pty></Cdtr><CdtrAcct><Id><IBAN>DE75512108001245126199</IBAN></Id></CdtrAcct></RltdPties>
+            <RltdAgts><CdtrAgt><FinInstnId><BICFI>SOLADEST600</BICFI></FinInstnId></CdtrAgt></RltdAgts>
+            <RmtInf><Ustrd>Abo Januar 2026 Kundennr 42</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+        <AddtlNtryInf>SEPA-Basislastschrift</AddtlNtryInf>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

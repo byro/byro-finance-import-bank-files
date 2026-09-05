@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BkToCstmrStmt>
+    <GrpHdr>
+      <MsgId>MSG-2026-01-16-0001</MsgId>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+    </GrpHdr>
+    <Stmt>
+      <Id>2026-01-15-001</Id>
+      <ElctrncSeqNb>12</ElctrncSeqNb>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+      <FrToDt>
+        <FrDtTm>2026-01-15T00:00:00+01:00</FrDtTm>
+        <ToDtTm>2026-01-15T23:59:59+01:00</ToDtTm>
+      </FrToDt>
+      <Acct>
+        <Id><IBAN>DE02120300000000202051</IBAN></Id>
+        <Ccy>EUR</Ccy>
+        <Ownr><Nm>Musterverein e.V.</Nm></Ownr>
+        <Svcr><FinInstnId><BIC>BYLADEM1001</BIC></FinInstnId></Svcr>
+      </Acct>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>OPBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">1000.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-14</Dt></Dt>
+      </Bal>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>CLBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">920.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-15</Dt></Dt>
+      </Bal>
+      <Ntry>
+        <NtryRef>1</NtryRef>
+        <Amt Ccy="EUR">80.00</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-01-15</Dt></BookgDt>
+        <ValDt><Dt>2026-01-15</Dt></ValDt>
+        <AcctSvcrRef>2026011500004-001</AcctSvcrRef>
+        <BkTxCd><Domn><Cd>PMNT</Cd><Fmly><Cd>ICDT</Cd><SubFmlyCd>ESCT</SubFmlyCd></Fmly></Domn></BkTxCd>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>RE-4711</EndToEndId><TxId>TX20260115000004</TxId></Refs>
+            <AmtDtls><TxAmt><Amt Ccy="EUR">80.00</Amt></TxAmt></AmtDtls>
+            <RltdPties><Dbtr><Nm>Musterverein e.V.</Nm></Dbtr><DbtrAcct><Id><IBAN>DE02120300000000202051</IBAN></Id></DbtrAcct><Cdtr><Nm>Stadtwerke Musterstadt GmbH</Nm></Cdtr><CdtrAcct><Id><IBAN>DE75512108001245126199</IBAN></Id></CdtrAcct></RltdPties>
+            <RltdAgts><DbtrAgt><FinInstnId><BIC>BYLADEM1001</BIC></FinInstnId></DbtrAgt><CdtrAgt><FinInstnId><BIC>SOLADEST600</BIC></FinInstnId></CdtrAgt></RltdAgts>
+            <RmtInf><Ustrd>Rechnung 4711 Strom Januar</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+        <AddtlNtryInf>Ueberweisung</AddtlNtryInf>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.054.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BkToCstmrDbtCdtNtfctn>
+    <GrpHdr>
+      <MsgId>MSG-2026-01-16-0001</MsgId>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+    </GrpHdr>
+    <Ntfctn>
+      <Id>NOTIFICATION-1</Id>
+    </Ntfctn>
+  </BkToCstmrDbtCdtNtfctn>
+</Document>

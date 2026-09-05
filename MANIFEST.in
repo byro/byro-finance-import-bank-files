@@ -1,0 +1,1 @@
+recursive-include byro_finance_import_bank_files/locale *.po

@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-06 00:54+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nicolas Häuser\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps.py:10 apps.py:13
+msgid "Bank file importers"
+msgstr "Bankdatei-Importer"
+
+#: apps.py:16
+#| msgid ""
+#| "Imports CAMT.053 bank statements through byro's bank transaction importer "
+#| "API."
+msgid "Importers for file-based bank statement formats through byro's bank transaction importer API. Currently supported: CAMT.053."
+msgstr "Importer für dateibasierte Kontoauszugsformate über byros Bankimport-API. Derzeit unterstützt: CAMT.053."
+
+#: importers/camt/importer.py:26 importers/camt/importer.py:29
+#: importers/camt/importer.py:32
+#, python-format
+msgid "Entry %(position)s of the CAMT statement has an invalid amount."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat einen ungültigen Betrag."
+
+#: importers/camt/importer.py:35 importers/camt/importer.py:38
+#: importers/camt/importer.py:41
+#, python-format
+msgid "Entry %(position)s of the CAMT statement has an unsupported entry status."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat einen nicht unterstützten Status."
+
+#: importers/camt/importer.py:44 importers/camt/importer.py:47
+#, python-format
+msgid "Entry %(position)s of the CAMT statement has no valid credit/debit indicator."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat keine gültige Soll/Haben-Kennung."
+
+#: importers/camt/importer.py:50 importers/camt/importer.py:52
+#, python-format
+msgid "Entry %(position)s of the CAMT statement has an invalid date."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat ein ungültiges Datum."
+
+#: importers/camt/importer.py:63
+msgid "The file contains a DTD or external entities and was rejected for security reasons."
+msgstr "Die Datei enthält eine DTD oder externe Entities und wurde aus Sicherheitsgründen abgelehnt."
+
+#: importers/camt/importer.py:67
+msgid "The uploaded file is not well-formed XML."
+msgstr "Die hochgeladene Datei ist kein wohlgeformtes XML."
+
+#: importers/camt/importer.py:70
+#, python-format
+msgid "The file is a %(type)s message. Only CAMT.053 bank statements are supported."
+msgstr "Die Datei ist eine %(type)s-Nachricht. Es werden nur CAMT.053-Kontoauszüge unterstützt."
+
+#: importers/camt/importer.py:75
+msgid "The uploaded file is a ZIP archive. Please extract it and upload the CAMT.053 XML file."
+msgstr "Die hochgeladene Datei ist ein ZIP-Archiv. Bitte entpacken und die CAMT.053-XML-Datei hochladen."
+
+#: importers/camt/importer.py:78
+msgid "The uploaded file is not a CAMT.053 bank statement."
+msgstr "Die hochgeladene Datei ist kein CAMT.053-Kontoauszug."
+
+#: importers/camt/importer.py:80
+msgid "The file contains statements for more than one bank account."
+msgstr "Die Datei enthält Kontoauszüge für mehr als ein Bankkonto."
+
+#: importers/camt/importer.py:83
+#, python-format
+msgid "Entry %(position)s of the CAMT statement has neither a booking date nor a value date."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat weder ein Buchungs- noch ein Valutadatum."
+
+#: importers/camt/importer.py:89
+#, python-format
+msgid "Entry %(position)s of the CAMT statement could not be interpreted."
+msgstr "Eintrag %(position)s des CAMT-Kontoauszugs konnte nicht interpretiert werden."
+
+#: importers/camt/importer.py:92
+msgid "The uploaded file could not be processed as a CAMT.053 bank statement."
+msgstr "Die hochgeladene Datei konnte nicht als CAMT.053-Kontoauszug verarbeitet werden."
+
+#: importers/camt/importer.py:99
+msgid "CAMT.053 bank statement"
+msgstr "CAMT.053-Kontoauszug"

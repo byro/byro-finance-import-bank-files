@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "byro-finance-import-bank-files"
+dynamic = ["version"]
+description = "File-based bank statement importers for byro"
+readme = "README.rst"
+license = "AGPL-3.0-only"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+authors = [
+  { name = "Nicolas Häuser", email = "Herr-Dante@users.noreply.github.com" },
+]
+classifiers = [
+  "Framework :: Django",
+  "Framework :: Django :: 5.2",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = ["defusedxml>=0.7"]
+
+[project.optional-dependencies]
+dev = ["black", "flake8", "isort", "pytest", "pytest-django"]
+
+[project.urls]
+Homepage = "https://github.com/byro/byro-finance-import-bank-files"
+
+# One plugin, one entry point. byro only uses the module part of the entry
+# point value to add the app to INSTALLED_APPS; Django then discovers PluginApp
+# from apps.py. The individual file formats are registered through the
+# ``bank_transaction_importers`` signal in signals.py, never as further entry
+# points.
+[project.entry-points."byro.plugin"]
+byro_finance_import_bank_files = "byro_finance_import_bank_files"
+
+[tool.setuptools.dynamic]
+version = { attr = "byro_finance_import_bank_files.__version__" }
+
+# Restrict discovery to the plugin package. Without an explicit include list,
+# setuptools treats every directory in the checkout as a (namespace) package,
+# including a byro core checkout placed next to the plugin in CI, which then
+# shadows the real ``byro`` package.
+[tool.setuptools.packages.find]
+include = ["byro_finance_import_bank_files", "byro_finance_import_bank_files.*"]
+
+# Compiled message catalogues are generated at build time (see setup.py) and
+# are runtime data of the package, so they are declared explicitly instead of
+# relying on MANIFEST.in discovery. MANIFEST.in only adds the .po sources.
+[tool.setuptools.package-data]
+byro_finance_import_bank_files = ["locale/*/LC_MESSAGES/*.mo"]
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+skip = ["migrations"]
+known_first_party = ["byro", "byro_finance_import_bank_files"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "byro.common.settings.test_settings"
+testpaths = ["tests"]

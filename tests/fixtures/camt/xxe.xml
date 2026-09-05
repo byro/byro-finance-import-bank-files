@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Document [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+  <BkToCstmrStmt>
+    <GrpHdr><MsgId>XXE</MsgId><CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm></GrpHdr>
+    <Stmt>
+      <Id>1</Id>
+      <Ntry>
+        <Amt Ccy="EUR">1.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-01-15</Dt></BookgDt>
+        <NtryDtls><TxDtls><RmtInf><Ustrd>&xxe;</Ustrd></RmtInf></TxDtls></NtryDtls>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

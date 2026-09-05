@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.08" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BkToCstmrStmt>
+    <GrpHdr>
+      <MsgId>MSG-2026-01-16-0001</MsgId>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+    </GrpHdr>
+    <Stmt>
+      <Id>2026-01-15-001</Id>
+      <ElctrncSeqNb>12</ElctrncSeqNb>
+      <CreDtTm>2026-01-16T06:00:00+01:00</CreDtTm>
+      <FrToDt>
+        <FrDtTm>2026-01-15T00:00:00+01:00</FrDtTm>
+        <ToDtTm>2026-01-15T23:59:59+01:00</ToDtTm>
+      </FrToDt>
+      <Acct>
+        <Id><IBAN>DE02120300000000202051</IBAN></Id>
+        <Ccy>EUR</Ccy>
+        <Ownr><Nm>Musterverein e.V.</Nm></Ownr>
+        <Svcr><FinInstnId><BICFI>BYLADEM1001</BICFI></FinInstnId></Svcr>
+      </Acct>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>OPBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">1000.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-14</Dt></Dt>
+      </Bal>
+      <Bal>
+        <Tp><CdOrPrtry><Cd>CLBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="EUR">1025.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2026-01-15</Dt></Dt>
+      </Bal>
+      <Ntry>
+        <NtryRef>1</NtryRef>
+        <Amt Ccy="EUR">25.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Sts><Cd>BOOK</Cd></Sts>
+        <BookgDt><DtTm>2026-01-16T00:30:00+02:00</DtTm></BookgDt>
+        <ValDt><DtTm>2026-01-17T00:00:00Z</DtTm></ValDt>
+        <AcctSvcrRef>2026011500001-001</AcctSvcrRef>
+        <BkTxCd/>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>NLL123-2026</EndToEndId></Refs>
+            <Amt Ccy="EUR">25.00</Amt><CdtDbtInd>CRDT</CdtDbtInd>
+            <RmtInf><Ustrd>Mitglied NLL123</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>
