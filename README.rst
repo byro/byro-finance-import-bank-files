@@ -291,6 +291,15 @@ The compiled ``.mo`` files are not checked in. They are compiled with
 ``msgfmt`` whenever the package is built or installed from source (see
 ``setup.py``), so every wheel ships them.
 
+Releasing
+---------
+
+The version is not maintained in the code: ``__version__`` is a development
+placeholder. Publishing a GitHub release with a tag such as ``v0.1.0`` runs the
+``build`` and ``pypi-publish`` jobs in ``.github/workflows/ci.yml``, which write
+the tag name into ``__version__``, build the sdist and wheel and upload them to
+PyPI with trusted publishing, the same way the byro core is released.
+
 Plugin structure
 ----------------
 
