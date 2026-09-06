@@ -1,0 +1,2 @@
+# Bank statement fixtures are byte-exact test input: never normalise their line endings.
+*.mt940 -text
