@@ -6,9 +6,11 @@ from byro.bookkeeping.bank_import import get_bank_transaction_importers
 from byro.common.utils import get_plugins
 from byro_finance_import_bank_files import signals
 from byro_finance_import_bank_files.importers.camt.importer import Camt053Importer
+from byro_finance_import_bank_files.importers.mt940.importer import Mt940Importer
 
 APP_LABEL = "byro_finance_import_bank_files"
 CAMT053 = "byro_finance_import_bank_files.camt053"
+MT940 = "byro_finance_import_bank_files.mt940"
 
 
 def test_app_config_with_plugin_meta_is_loaded():
@@ -22,14 +24,19 @@ def test_plugin_is_listed_by_byro():
     assert APP_LABEL in [app.label for app in get_plugins()]
 
 
-def test_importer_is_registered_with_byro():
+def test_importers_are_registered_with_byro():
     importers = get_bank_transaction_importers()
     assert isinstance(importers[CAMT053], Camt053Importer)
     assert str(importers[CAMT053].label) == "CAMT.053 bank statement"
+    assert isinstance(importers[MT940], Mt940Importer)
+    assert str(importers[MT940].label) == "MT940 bank statement"
 
 
 def test_every_plugin_importer_is_registered_under_its_identifier():
     registered = get_bank_transaction_importers()
-    assert [type(importer) for importer in signals.IMPORTERS] == [Camt053Importer]
+    assert [type(importer) for importer in signals.IMPORTERS] == [
+        Camt053Importer,
+        Mt940Importer,
+    ]
     for importer in signals.IMPORTERS:
         assert registered[importer.identifier] is importer

@@ -20,7 +20,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
 ]
-dependencies = ["defusedxml>=0.7"]
+dependencies = ["defusedxml>=0.7", "mt-940>=5.1,<6"]
 
 [project.optional-dependencies]
 dev = ["black", "flake8", "isort", "pytest", "pytest-django"]
@@ -64,3 +64,7 @@ known_first_party = ["byro", "byro_finance_import_bank_files"]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "byro.common.settings.test_settings"
 testpaths = ["tests"]
+# The importer test directories use the same module names (test_parser.py in
+# tests/importers/camt and tests/importers/mt940), so test modules are imported
+# by path instead of by basename.
+addopts = ["--import-mode=importlib"]

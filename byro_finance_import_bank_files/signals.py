@@ -12,12 +12,13 @@ from django.dispatch import receiver
 from byro.bookkeeping.signals import bank_transaction_importers
 
 from .importers.camt.importer import Camt053Importer
+from .importers.mt940.importer import Mt940Importer
 
 #: The bank file importers this plugin provides, one per supported format.
 #: Importers are stateless, so a single instance each is enough. The signal is
 #: sent whenever byro builds the importer selection, so registration must be
 #: cheap.
-IMPORTERS = [Camt053Importer()]
+IMPORTERS = [Camt053Importer(), Mt940Importer()]
 
 
 @receiver(

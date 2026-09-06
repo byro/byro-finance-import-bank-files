@@ -18,10 +18,10 @@ Supported:
 
 - **CAMT.053** (ISO 20022 ``BankToCustomerStatement``), see `CAMT.053
   importer`_ below.
+- **MT940** (SWIFT customer statement message), see `MT940 importer`_ below.
 
 Planned, but not implemented yet:
 
-- MT940
 - generic bank CSV
 
 Explicitly **not** part of this plugin:
@@ -40,7 +40,7 @@ Requirements
   `byro pull request #514`_ and is available on byro's ``main`` branch since
   2026-09-04. As soon as a byro release contains it, that release is the
   minimum version; until then, install byro from ``main``.
-- `defusedxml`_ (installed automatically)
+- `defusedxml`_ and `mt-940`_ (installed automatically)
 - ``gettext`` (``msgfmt``) **only** for development and for building or
   installing the plugin from source: it compiles the translation catalogues at
   build time. Installing a prebuilt wheel does not need it.
@@ -63,15 +63,16 @@ Usage
 -----
 
 1. Download a bank statement file from your online banking. For CAMT.053 it is
-   often offered as "CAMT" or "XML" export (German banks: "camt.053", "C53").
+   often offered as "CAMT" or "XML" export (German banks: "camt.053", "C53"),
+   for MT940 as "MT940", "SWIFT" or "STA" export.
 2. In byro open *Finances → Import bank transactions*.
 3. Select the importer for your file format, for example **CAMT.053 bank
    statement**, choose the file and submit.
 
 byro reports how many transactions were read, how many were newly imported and
 how many were already known. Re-uploading the same or an overlapping statement
-does not create duplicate bookings. Skipped entries (pending, information,
-zero amount) are counted in byro's log.
+does not create duplicate bookings. CAMT.053 entries that are skipped (pending,
+information, zero amount) are counted in byro's log.
 
 CAMT.053 importer
 -----------------
@@ -145,12 +146,88 @@ metadata to ``Booking.data`` where available: ``camt_version``,
 ``counterparty_account_id``. The complete XML file is kept by byro as the
 import source and is not copied into the bookings.
 
+MT940 importer
+--------------
+
+Supported
+~~~~~~~~~
+
+- SWIFT MT940 customer statement files as exported by German and other
+  European banks, parsed with the `mt-940`_ library (version 5.1 or newer,
+  below 6). Files with several statements (``:20:`` blocks) for the same
+  account; every statement keeps its own account, statement number, balances
+  and currency.
+- Every ``:61:`` statement line is one transaction. ``C`` and ``RD`` (reversal
+  of a debit) become positive amounts, ``D`` and ``RC`` (reversal of a credit)
+  negative amounts; reversals are marked in the metadata. Amounts are taken as
+  written (``Decimal``, no rounding); a zero amount fails the import instead
+  of being skipped.
+- Dates: the value date of ``:61:`` and, if present, its entry date (``MMDD``)
+  as booking date. The year of the entry date is derived from the value date,
+  also across a year boundary. Without an entry date the value date is used
+  and marked in the metadata.
+- Structured German ``:86:`` fields (``166?00...?20EREF+...?32Name``): purpose
+  (``SVWZ+``, ``?20``-``?29``, ``?60``-``?65``), counterparty name (``?32``/``?33``),
+  counterparty IBAN (``?31`` or ``IBAN+``) and BIC (``?30``), end-to-end ID,
+  mandate ID, creditor identifier, ``KREF+``, ``PURP+``, ``ABWA+``/``ABWE+``,
+  return fee and original amount. IBAN and BIC are only reported as such when
+  the value has the shape of one; legacy account numbers and bank codes are
+  kept as metadata.
+- Unstructured ``:86:`` texts become the memo unchanged (lines joined with
+  single spaces). Nothing is guessed from free text.
+- ``transaction_code`` is the SWIFT transaction type of ``:61:`` (``NTRF``,
+  ``NMSC``, ...); the German GVC (``166``) is kept separately as
+  ``business_transaction_code``.
+- Stable external IDs for byro's duplicate detection: the bank reference after
+  ``//`` in ``:61:``, unless it is a placeholder (``NONREF``, ``NOTPROVIDED``,
+  ...) or repeated within the file. byro then falls back to its fingerprint.
+- Encodings: UTF-8 (with or without byte order mark) and Windows-1252, both
+  decoded strictly. UTF-16/UTF-32 files are rejected with a clear message.
+- Balances: opening balance plus transactions is compared with the closing
+  balance; a mismatch is logged (statement position only) and stored on the
+  parsed statement, the file is still imported.
+
+Not supported
+~~~~~~~~~~~~~
+
+- MT941 and MT942 (interim reports)
+- Files containing statements for more than one bank account (rejected, see
+  CAMT.053)
+- Statements without ``:25:`` account identification or without any balance
+  (and therefore without a currency); currencies other than EUR fail in the
+  byro core as for CAMT.053
+- Bank specific ``:86:`` conventions outside the structured German format, for
+  example the Dutch slash separated ``/TRTP/.../IBAN/...`` details: they stay
+  in the memo, no counterparty is extracted
+- ``:NS:``, ``:13D:``, ``:21:``, ``:34F:`` and ``:90C:``/``:90D:`` are not
+  interpreted
+
+Metadata
+~~~~~~~~
+
+The importer adds MT940 specific metadata to ``Booking.data`` where available:
+``structured_details``, ``debit_credit_mark``, ``reversal``,
+``statement_reference``, ``statement_number``, ``statement_sequence_number``,
+``business_transaction_code``, ``posting_text``, ``prima_nota``,
+``account_owner_reference``, ``customer_reference``, ``supplementary_details``,
+``text_key_extension``, ``purpose_code``, ``ultimate_debtor_name``,
+``ultimate_creditor_name``, ``mandate_date``, ``sequence_type``,
+``original_creditor_id``, ``original_mandate_id``, ``debtor_id``,
+``compensation_amount``, ``original_amount``, ``settlement_date``,
+``booking_date_source``, ``counterparty_account_id`` and
+``counterparty_bank_code``. See ``feature/mt940-importer.md`` for the exact
+mapping rules and known limitations.
+
 Security and privacy
 --------------------
 
 - Bank files are untrusted input. XML based formats (CAMT) are parsed with
   `defusedxml`_; DTDs, entity declarations and external references are
   rejected, and nothing is fetched from the network while parsing.
+- MT940 files are decoded strictly by the plugin (no lossy fallbacks) and
+  handed to the `mt-940`_ library as text through a stream, never as a string
+  or path, so file content can never be mistaken for a file name. The
+  library's tag loggers, which would write raw statement lines, are silenced.
 - Error messages shown in byro never contain file content. The plugin logs
   only technical facts (format version, entry and transaction counts, error
   class), never IBANs, names or remittance text.
@@ -184,12 +261,13 @@ Run the test suite against byro's test settings with an SQLite database::
 
     $ BYRO_DB_ENGINE=sqlite3 pytest
 
-``tests/test_plugin.py`` checks the plugin registration. The CAMT.053 tests
-live in ``tests/importers/camt``: ``test_parser.py`` exercises the parser with
-the fixtures in ``tests/fixtures/camt`` without Django, ``test_importer.py``
-covers the mapping to byro's ``ImportedBankTransaction`` and the user facing
-error messages, and ``test_integration.py`` uploads fixtures through byro's
-import page and checks the resulting bookings.
+``tests/test_plugin.py`` checks the plugin registration. Every importer has its
+own test directory below ``tests/importers`` (``camt``, ``mt940``) with the same
+layout: ``test_parser.py`` exercises the parser with the fixtures in
+``tests/fixtures/<format>`` without Django, ``test_importer.py`` covers the
+mapping to byro's ``ImportedBankTransaction`` and the user facing error
+messages, and ``test_integration.py`` uploads fixtures through byro's import
+page and checks the resulting bookings.
 
 Format and lint the code the same way the byro core does::
 
@@ -233,8 +311,12 @@ and one ``byro.plugin`` entry point. Each supported file format is one
 - ``byro_finance_import_bank_files/importers/camt/importer.py`` is the byro
   adapter: it implements ``BankTransactionImporter``, maps parser output to
   ``ImportedBankTransaction`` and translates parser errors into user messages.
-- ``feature/camt053-importer.md`` is the functional specification of the
-  CAMT.053 importer.
+- ``byro_finance_import_bank_files/importers/mt940/parser.py`` is the MT940
+  parser built on the `mt-940`_ library (decoding, statement handling and the
+  mapping to ``Mt940Transaction`` objects, raising ``Mt940Error`` subclasses);
+  ``importers/mt940/importer.py`` is the corresponding byro adapter.
+- ``feature/camt053-importer.md`` and ``feature/mt940-importer.md`` are the
+  functional specifications of the two importers.
 
 See the `byro plugin documentation`_ and its chapter on
 `bank transaction importers`_ for the API this plugin implements.
@@ -249,6 +331,7 @@ Public License version 3 only (AGPL-3.0-only). See ``LICENSE`` for details.
 .. _byro: https://github.com/byro/byro
 .. _byro pull request #514: https://github.com/byro/byro/pull/514
 .. _defusedxml: https://pypi.org/project/defusedxml/
+.. _mt-940: https://pypi.org/project/mt-940/
 .. _byro development setup: https://byro.readthedocs.io/en/latest/developer/setup.html
 .. _byro plugin documentation: https://byro.readthedocs.io/en/latest/developer/plugins/
 .. _bank transaction importers: https://byro.readthedocs.io/en/latest/developer/plugins/bank-transaction-importers.html

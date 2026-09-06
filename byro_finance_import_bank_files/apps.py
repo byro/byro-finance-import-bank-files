@@ -14,7 +14,7 @@ class PluginApp(AppConfig):
         author = "Nicolas Häuser"
         description = _(
             "Importers for file-based bank statement formats through byro's bank "
-            "transaction importer API. Currently supported: CAMT.053."
+            "transaction importer API. Currently supported: CAMT.053 and MT940."
         )
         visible = True
         version = __version__

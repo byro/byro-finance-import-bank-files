@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-06 00:54+0200\n"
+"POT-Creation-Date: 2026-09-06 01:58+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Nicolas Häuser\n"
 "Language-Team: \n"
@@ -16,28 +16,37 @@ msgid "Bank file importers"
 msgstr "Bankdatei-Importer"
 
 #: apps.py:16
-#| msgid ""
-#| "Imports CAMT.053 bank statements through byro's bank transaction importer "
-#| "API."
-msgid "Importers for file-based bank statement formats through byro's bank transaction importer API. Currently supported: CAMT.053."
-msgstr "Importer für dateibasierte Kontoauszugsformate über byros Bankimport-API. Derzeit unterstützt: CAMT.053."
+
+msgid ""
+"Importers for file-based bank statement formats through byro's bank "
+"transaction importer API. Currently supported: CAMT.053 and MT940."
+msgstr ""
+"Importer für dateibasierte Kontoauszugsformate über byros Bankimport-API. "
+"Derzeit unterstützt: CAMT.053 und MT940."
 
 #: importers/camt/importer.py:26 importers/camt/importer.py:29
 #: importers/camt/importer.py:32
 #, python-format
 msgid "Entry %(position)s of the CAMT statement has an invalid amount."
-msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat einen ungültigen Betrag."
+msgstr ""
+"Eintrag %(position)s des CAMT-Kontoauszugs hat einen ungültigen Betrag."
 
 #: importers/camt/importer.py:35 importers/camt/importer.py:38
 #: importers/camt/importer.py:41
 #, python-format
-msgid "Entry %(position)s of the CAMT statement has an unsupported entry status."
-msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat einen nicht unterstützten Status."
+msgid ""
+"Entry %(position)s of the CAMT statement has an unsupported entry status."
+msgstr ""
+"Eintrag %(position)s des CAMT-Kontoauszugs hat einen nicht unterstützten "
+"Status."
 
 #: importers/camt/importer.py:44 importers/camt/importer.py:47
 #, python-format
-msgid "Entry %(position)s of the CAMT statement has no valid credit/debit indicator."
-msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat keine gültige Soll/Haben-Kennung."
+msgid ""
+"Entry %(position)s of the CAMT statement has no valid credit/debit indicator."
+msgstr ""
+"Eintrag %(position)s des CAMT-Kontoauszugs hat keine gültige Soll/Haben-"
+"Kennung."
 
 #: importers/camt/importer.py:50 importers/camt/importer.py:52
 #, python-format
@@ -45,8 +54,12 @@ msgid "Entry %(position)s of the CAMT statement has an invalid date."
 msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat ein ungültiges Datum."
 
 #: importers/camt/importer.py:63
-msgid "The file contains a DTD or external entities and was rejected for security reasons."
-msgstr "Die Datei enthält eine DTD oder externe Entities und wurde aus Sicherheitsgründen abgelehnt."
+msgid ""
+"The file contains a DTD or external entities and was rejected for security "
+"reasons."
+msgstr ""
+"Die Datei enthält eine DTD oder externe Entities und wurde aus "
+"Sicherheitsgründen abgelehnt."
 
 #: importers/camt/importer.py:67
 msgid "The uploaded file is not well-formed XML."
@@ -54,35 +67,166 @@ msgstr "Die hochgeladene Datei ist kein wohlgeformtes XML."
 
 #: importers/camt/importer.py:70
 #, python-format
-msgid "The file is a %(type)s message. Only CAMT.053 bank statements are supported."
-msgstr "Die Datei ist eine %(type)s-Nachricht. Es werden nur CAMT.053-Kontoauszüge unterstützt."
+msgid ""
+"The file is a %(type)s message. Only CAMT.053 bank statements are supported."
+msgstr ""
+"Die Datei ist eine %(type)s-Nachricht. Es werden nur CAMT.053-Kontoauszüge "
+"unterstützt."
 
 #: importers/camt/importer.py:75
-msgid "The uploaded file is a ZIP archive. Please extract it and upload the CAMT.053 XML file."
-msgstr "Die hochgeladene Datei ist ein ZIP-Archiv. Bitte entpacken und die CAMT.053-XML-Datei hochladen."
+msgid ""
+"The uploaded file is a ZIP archive. Please extract it and upload the "
+"CAMT.053 XML file."
+msgstr ""
+"Die hochgeladene Datei ist ein ZIP-Archiv. Bitte entpacken und die CAMT.053-"
+"XML-Datei hochladen."
 
 #: importers/camt/importer.py:78
 msgid "The uploaded file is not a CAMT.053 bank statement."
 msgstr "Die hochgeladene Datei ist kein CAMT.053-Kontoauszug."
 
-#: importers/camt/importer.py:80
+#: importers/camt/importer.py:80 importers/mt940/importer.py:67
 msgid "The file contains statements for more than one bank account."
 msgstr "Die Datei enthält Kontoauszüge für mehr als ein Bankkonto."
 
 #: importers/camt/importer.py:83
 #, python-format
-msgid "Entry %(position)s of the CAMT statement has neither a booking date nor a value date."
-msgstr "Eintrag %(position)s des CAMT-Kontoauszugs hat weder ein Buchungs- noch ein Valutadatum."
+msgid ""
+"Entry %(position)s of the CAMT statement has neither a booking date nor a "
+"value date."
+msgstr ""
+"Eintrag %(position)s des CAMT-Kontoauszugs hat weder ein Buchungs- noch ein "
+"Valutadatum."
 
 #: importers/camt/importer.py:89
 #, python-format
 msgid "Entry %(position)s of the CAMT statement could not be interpreted."
-msgstr "Eintrag %(position)s des CAMT-Kontoauszugs konnte nicht interpretiert werden."
+msgstr ""
+"Eintrag %(position)s des CAMT-Kontoauszugs konnte nicht interpretiert werden."
 
 #: importers/camt/importer.py:92
 msgid "The uploaded file could not be processed as a CAMT.053 bank statement."
-msgstr "Die hochgeladene Datei konnte nicht als CAMT.053-Kontoauszug verarbeitet werden."
+msgstr ""
+"Die hochgeladene Datei konnte nicht als CAMT.053-Kontoauszug verarbeitet "
+"werden."
 
 #: importers/camt/importer.py:99
 msgid "CAMT.053 bank statement"
 msgstr "CAMT.053-Kontoauszug"
+
+#: importers/mt940/importer.py:25
+#, python-format
+msgid "Statement %(statement)s of the MT940 file contains an invalid date."
+msgstr "Kontoauszug %(statement)s der MT940-Datei enthält ein ungültiges Datum."
+
+#: importers/mt940/importer.py:27
+#, python-format
+msgid "Statement %(statement)s of the MT940 file contains an invalid amount."
+msgstr "Kontoauszug %(statement)s der MT940-Datei enthält einen ungültigen Betrag."
+
+#: importers/mt940/importer.py:30
+#, python-format
+msgid ""
+"Statement %(statement)s of the MT940 file contains a statement line (:61:) "
+"without a transaction type code, so its transactions could not be separated."
+msgstr ""
+"Kontoauszug %(statement)s der MT940-Datei enthält eine Umsatzzeile (:61:) "
+"ohne Geschäftsvorfall-Code, sodass die Umsätze nicht getrennt werden "
+"konnten."
+
+#: importers/mt940/importer.py:37
+#, python-format
+msgid ""
+"Transaction %(position)s in statement %(statement)s of the MT940 file has no "
+"valid debit/credit mark."
+msgstr ""
+"Umsatz %(position)s in Kontoauszug %(statement)s der MT940-Datei hat keine "
+"gültige Soll/Haben-Kennung."
+
+#: importers/mt940/importer.py:41
+#, python-format
+msgid ""
+"Transaction %(position)s in statement %(statement)s of the MT940 file has an "
+"invalid amount."
+msgstr ""
+"Umsatz %(position)s in Kontoauszug %(statement)s der MT940-Datei hat einen "
+"ungültigen Betrag."
+
+#: importers/mt940/importer.py:45
+#, python-format
+msgid ""
+"Transaction %(position)s in statement %(statement)s of the MT940 file has an "
+"amount of zero."
+msgstr ""
+"Umsatz %(position)s in Kontoauszug %(statement)s der MT940-Datei hat einen "
+"Betrag von null."
+
+#: importers/mt940/importer.py:59
+msgid ""
+"The file is encoded as UTF-16 or UTF-32, which is not supported. Please "
+"export the statement as UTF-8 or Windows-1252 text."
+msgstr ""
+"Die Datei ist als UTF-16 oder UTF-32 kodiert, was nicht unterstützt wird. "
+"Bitte den Kontoauszug als UTF-8- oder Windows-1252-Text exportieren."
+
+#: importers/mt940/importer.py:63
+msgid "The file could not be decoded as UTF-8 or Windows-1252 text."
+msgstr "Die Datei konnte nicht als UTF-8- oder Windows-1252-Text dekodiert werden."
+
+#: importers/mt940/importer.py:65
+
+msgid "The uploaded file is not an MT940 bank statement."
+msgstr "Die hochgeladene Datei ist kein MT940-Kontoauszug."
+
+#: importers/mt940/importer.py:70
+#, python-format
+msgid ""
+"Field :%(tag)s: in statement %(statement)s of the MT940 file could not be "
+"interpreted."
+msgstr ""
+"Feld :%(tag)s: in Kontoauszug %(statement)s der MT940-Datei konnte nicht "
+"interpretiert werden."
+
+#: importers/mt940/importer.py:75
+#, python-format
+msgid ""
+"Statement %(statement)s of the MT940 file has no account identification "
+"(:25:)."
+msgstr ""
+"Kontoauszug %(statement)s der MT940-Datei hat keine Kontoidentifikation "
+"(:25:)."
+
+#: importers/mt940/importer.py:80
+#, python-format
+msgid ""
+"Statement %(statement)s of the MT940 file has no balance and therefore no "
+"currency."
+msgstr ""
+"Kontoauszug %(statement)s der MT940-Datei hat keinen Saldo und damit keine "
+"Währung."
+
+#: importers/mt940/importer.py:87
+#, python-format
+msgid ""
+"Transaction %(position)s in statement %(statement)s of the MT940 file could "
+"not be interpreted."
+msgstr ""
+"Umsatz %(position)s in Kontoauszug %(statement)s der MT940-Datei konnte "
+"nicht interpretiert werden."
+
+#: importers/mt940/importer.py:95
+#, python-format
+msgid "Statement %(statement)s of the MT940 file could not be interpreted."
+msgstr "Kontoauszug %(statement)s der MT940-Datei konnte nicht interpretiert werden."
+
+#: importers/mt940/importer.py:98
+
+msgid "The uploaded file could not be processed as an MT940 bank statement."
+msgstr ""
+"Die hochgeladene Datei konnte nicht als MT940-Kontoauszug verarbeitet "
+"werden."
+
+#: importers/mt940/importer.py:105
+
+msgid "MT940 bank statement"
+msgstr "MT940-Kontoauszug"
